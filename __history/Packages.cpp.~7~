@@ -1,0 +1,75 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "Packages.h"
+#include "Home.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TPackageForm *PackageForm;
+//---------------------------------------------------------------------------
+__fastcall TPackageForm::TPackageForm(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+String itemCode = "";
+String itemName = "";
+String price = "";
+String comma = " , ";
+int total = 0;
+
+void __fastcall TPackageForm::btnBackClick(TObject *Sender)
+{
+    HomeScreen -> Show();
+	this -> Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TPackageForm::btnSearchClick(TObject *Sender)
+{
+       fstream myFile;
+	myFile.open("BakeryItems.txt",ios::in);
+
+	String searchItem = txtItemCode -> Text;
+
+
+	if(myFile.is_open()){
+		std::string line;
+
+		while(getline(myFile,line)){
+			std::vector<std::string> parsedLine = parseCommaDelimitedString(line);
+			itemCode = parsedLine.at(0);
+			if(itemCode== searchItem){
+
+				itemName = parsedLine.at(1);
+				price = parsedLine.at(2);
+                break;
+			}
+		}
+
+		txtItemCode -> Text = itemCode;
+		txtItemName -> Text= itemName;
+
+
+
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TPackageForm::btnAddItemsClick(TObject *Sender)
+{
+     int prc = StrToInt(price);
+	 int qty = StrToInt (txtQty ->Text);
+     int itemTot = price*qty;
+
+	 total = total+itemTot;
+
+	 listPkgDetails -> Items -> Add(itemName+comma+qty);
+
+     txtTotal -> Text = total;
+}
+//---------------------------------------------------------------------------
+

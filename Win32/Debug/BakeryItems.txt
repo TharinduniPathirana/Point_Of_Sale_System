@@ -1,0 +1,4 @@
+1,Chicken Bun,50
+2,Pastry,100
+3,Rolls,40
+4,Cutlet,50

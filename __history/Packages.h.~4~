@@ -1,0 +1,47 @@
+//---------------------------------------------------------------------------
+
+#ifndef PackagesH
+#define PackagesH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include <FMX.Controls.Presentation.hpp>
+#include <FMX.Edit.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.ListBox.hpp>
+#include <FMX.StdCtrls.hpp>
+#include <FMX.Types.hpp>
+//---------------------------------------------------------------------------
+class TPackageForm : public TForm
+{
+__published:	// IDE-managed Components
+	TLabel *Label1;
+	TLabel *Label2;
+	TLabel *Label3;
+	TEdit *txtItemCode;
+	TLabel *Label4;
+	TEdit *txtQty;
+	TEdit *txtPkgCode;
+	TButton *btnAddItems;
+	TListBox *ListBox1;
+	TEdit *txtTotal;
+	TLabel *Label5;
+	TButton *btnSave;
+	TListBox *listAll;
+	TButton *btnViewAll;
+	TButton *btnBack;
+	TButton *btnSearch;
+	TLabel *Label6;
+	TEdit *txtItemName;
+	void __fastcall btnBackClick(TObject *Sender);
+	void __fastcall btnSearchClick(TObject *Sender);
+	void __fastcall btnAddItemsClick(TObject *Sender);
+private:	// User declarations
+public:		// User declarations
+	__fastcall TPackageForm(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TPackageForm *PackageForm;
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,128 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#include <sstream>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
+#pragma hdrstop
+
+#include "ManageSales.h"
+#include "Home.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TManageSalesForm *ManageSalesForm;
+//---------------------------------------------------------------------------
+__fastcall TManageSalesForm::TManageSalesForm(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+
+std::vector<std::string> parseCommaDelimitedString(std::string line){
+	std::vector<std::string> result;
+	std::stringstream s_stream(line);
+
+	while(s_stream.good()){
+		std::string substr;
+		getline(s_stream,substr,',');
+		result.push_back(substr);
+	}
+
+    return result;
+}
+//---------------------------------------------------------------------------
+
+AnsiString items[20];
+int count = 0;
+String itemCode = "";
+String itemName = "";
+String price = "";
+String comma = ",";
+String codeTag = "Item Code: ";
+String nameTag = "Item Name: ";
+String priceTag = "Item Amount: ";
+String qtyTag = "Item Quantity: ";
+int total = 0;
+
+void __fastcall TManageSalesForm::btnBackClick(TObject *Sender)
+{
+    HomeScreen -> Show();
+	this -> Close();
+}
+
+//---------------------------------------------------------------------------
+
+
+void __fastcall TManageSalesForm::btnSaveClick(TObject *Sender)
+{
+     	fstream myFile;
+	myFile.open("Sales.txt",ios::app);
+
+	if(myFile.is_open()){
+
+		AnsiString date = txtDate -> Text;
+		AnsiString total = txtTotal -> Text;
+		AnsiString invoiceNo = txtInvoice -> Text;
+
+		myFile<<date<<","<<invoiceNo<<","<<total<<","<<items<<"\n";
+		myFile.close();
+
+		txtDate -> Text = "";
+		txtTotal -> Text = "";
+		txtInvoice -> Text = "";
+	}
+}
+//---------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------
+
+void __fastcall TManageSalesForm::btnSearchClick(TObject *Sender)
+{
+    fstream myFile;
+	myFile.open("BakeryItems.txt",ios::in);
+
+	String searchItem = txtItemCode -> Text;
+
+
+	if(myFile.is_open()){
+		std::string line;
+
+		while(getline(myFile,line)){
+			std::vector<std::string> parsedLine = parseCommaDelimitedString(line);
+			itemCode = parsedLine.at(0);
+			if(itemCode== searchItem){
+
+				itemName = parsedLine.at(1);
+				price = parsedLine.at(2);
+                break;
+			}
+		}
+
+		txtItemCode -> Text = itemCode;
+		txtItemName -> Text= itemName;
+
+
+
+	}
+}
+
+void __fastcall TManageSalesForm::btnAddSaleClick(TObject *Sender)
+{
+
+	 int prc = StrToInt(price);
+	 int qty =1;
+     int itemTot = price*qty;
+
+	 total = total+itemTot;
+
+	 listSales -> Items -> Add(itemName+comma+qty+comma+itemTot);
+
+     txtTotal -> Text = total;
+
+}
+//---------------------------------------------------------------------------
+

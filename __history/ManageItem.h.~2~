@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------
+
+#ifndef ManageItemH
+#define ManageItemH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+//---------------------------------------------------------------------------
+class TManageItemsForm : public TForm
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall TManageItemsForm(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TManageItemsForm *ManageItemsForm;
+//---------------------------------------------------------------------------
+#endif

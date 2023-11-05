@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------
+
+#ifndef AvailableItemsH
+#define AvailableItemsH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+//---------------------------------------------------------------------------
+class TAvailableItemsForm : public TForm
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall TAvailableItemsForm(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TAvailableItemsForm *AvailableItemsForm;
+//---------------------------------------------------------------------------
+#endif

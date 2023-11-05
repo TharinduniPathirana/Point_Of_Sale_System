@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------
+
+#ifndef loginH
+#define loginH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+//---------------------------------------------------------------------------
+class TLoginForm : public TForm
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall TLoginForm(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TLoginForm *LoginForm;
+//---------------------------------------------------------------------------
+#endif

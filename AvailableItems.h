@@ -1,0 +1,41 @@
+//---------------------------------------------------------------------------
+
+#ifndef AvailableItemsH
+#define AvailableItemsH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include <FMX.Controls.Presentation.hpp>
+#include <FMX.Edit.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.ListBox.hpp>
+#include <FMX.StdCtrls.hpp>
+#include <FMX.Types.hpp>
+//---------------------------------------------------------------------------
+class TAvailableItemsForm : public TForm
+{
+__published:	// IDE-managed Components
+	TLabel *Label1;
+	TEdit *txtSearch;
+	TButton *btnSearch;
+	TLabel *Label2;
+	TLabel *Label3;
+	TLabel *Label4;
+	TEdit *txtItemCode;
+	TEdit *txtItemName;
+	TEdit *txtPrice;
+	TListBox *listAllItems;
+	TButton *btnShowAll;
+	TButton *btnBack;
+	void __fastcall btnBackClick(TObject *Sender);
+	void __fastcall btnShowAllClick(TObject *Sender);
+	void __fastcall btnSearchClick(TObject *Sender);
+private:	// User declarations
+public:		// User declarations
+	__fastcall TAvailableItemsForm(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TAvailableItemsForm *AvailableItemsForm;
+//---------------------------------------------------------------------------
+#endif
